@@ -75,11 +75,11 @@ public class ControllerServlet extends HttpServlet {
         // if category page is requested
         if (userPath.equals("/category")) {
             // TODO: Implement category request
-// get categoryId from request
+            // get categoryId from request
             String categoryId = request.getQueryString();
 
             if (categoryId != null) {
-// get categoryId from request
+                // get categoryId from request
                 // get selected category
                 //selectedCategory = categoryFacade.find(categoryId);
                 selectedCategory = categoryFacade.find(Integer.parseInt(categoryId));
@@ -114,7 +114,28 @@ public class ControllerServlet extends HttpServlet {
             // if user switches language
         } else if (userPath.equals("/chooseLanguage")) {
             // TODO: Implement language request
+            // get language choice
+            String language = request.getParameter("language");
 
+            // place in request scope
+            request.setAttribute("language", language);
+
+            String userView = (String) session.getAttribute("view");
+
+            if ((userView != null)
+                    && (!userView.equals("/index"))) {     // index.jsp exists outside 'view' folder
+                // so must be forwarded separately
+                userPath = userView;
+            } else {
+
+                // if previous view is index or cannot be determined, send user to welcome page
+                try {
+                    request.getRequestDispatcher("/index.jsp").forward(request, response);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+                return;
+            }
         }
 
         // use RequestDispatcher to forward request internally

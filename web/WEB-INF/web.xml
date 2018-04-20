@@ -37,6 +37,8 @@
             <description>Header and Footer settings</description>
             <url-pattern>/index.jsp</url-pattern>
             <url-pattern>/WEB-INF/view/*</url-pattern>
+            <url-pattern>/admin/login.jsp</url-pattern>
+            <url-pattern>/admin/error.jsp</url-pattern>
             <include-prelude>/WEB-INF/jspf/header.jspf</include-prelude>
             <include-coda>/WEB-INF/jspf/footer.jspf</include-coda>
         </jsp-property-group>
@@ -47,4 +49,28 @@
         <res-auth>Container</res-auth>
         <res-sharing-scope>Shareable</res-sharing-scope>
     </resource-ref>-->
+    <security-constraint>
+        <display-name>Admin</display-name>
+        <web-resource-collection>
+            <web-resource-name>PetStore Administration</web-resource-name>
+            <description/>
+            <url-pattern>/Admin/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>PetStoreAdmin</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>file</realm-name>
+        <form-login-config>
+            <form-login-page>/admin/login.jsp</form-login-page>
+            <form-error-page>/admin/error.jsp</form-error-page>
+        </form-login-config>
+    </login-config>
+    <security-role>
+        <description/>
+        <role-name>PetStoreAdmin</role-name>
+    </security-role>
 </web-app>

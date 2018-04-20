@@ -9,51 +9,29 @@
 https://netbeans.org/kb/docs/javaee/ecommerce/connect-db.html
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" type="text/css" href="resources/css/petstore.css">
-        <title>The PetStore</title>
-    </head>
-    <body>
-        <div id="main">
+<%-- Set session-scoped variable to track the view user is coming from.
+     This is used by the language mechanism in the Controller so that
+     users view the same page when switching between English and Czech. --%>
+<c:set var='view' value='/index' scope='session' />
 
-            <!-- test to access context parameters -->
+<div id="indexLeftColumn">
+    <div id="welcomeText">
+        <p style="font-size: larger"><fmt:message key='greeting' /></p>
+        <p><fmt:message key='introText' /></p>
+    </div>
+</div>
 
-            <%-- <sql:query var="categories" dataSource="jdbc/petstore">
-                SELECT * FROM category
-            </sql:query>--%>
+<div id="indexRightColumn">
+    <c:forEach var="category" items="${categories}">
+        <div class="categoryBox">
+            <a href="<c:url value='category?${category.id}'/>">
+                <span class="categoryLabel"></span>
+                <span class="categoryLabelText"><fmt:message key='${category.name}'/></span>
 
-            <div id="indexLeftColumn">
-                <div id="welcomeText">
-                    <p style="font-size: larger"><fmt:message key='greeting'/></p>
-                    <p><fmt:message key='introText'/></p>
-            <!--                    <p style="font-size: larger">Welcome to the online home of the Affable Bean Green Grocer.</p>
-
-                                <p>Enjoy browsing and learning more about our unique home delivery
-                                    service bringing you fresh organic produce, dairy, meats, breads
-                                    and other delicious and healthy items to your doorstep.</p>
-                            </div>-->
-                </div>
-
-                <div id="indexRightColumn">
-                    <c:forEach var="category" items="${categories}">
-                        <div class="categoryBox">
-
-                            <a href="category?${category.id}">
-
-                                <span class="categoryLabelText">${category.name}</span>
-
-                                <img src="${initParam.imagesPath}${category.name}.jpg"
-                                     alt="${category.name}">
-                            </a>
-                        </div>
-                    </c:forEach>
-                </div>
-
-
-            </div>
-    </body>
-</html>
+                <img src="${initParam.imagesPath}${category.name}.jpg"
+                     alt="<fmt:message key='${category.name}'/>" class="categoryImage">
+            </a>
+        </div>
+    </c:forEach>
+</div>
+             
