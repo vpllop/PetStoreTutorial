@@ -70,6 +70,7 @@ public class OrderManager {
         customer.setCcNumber(ccNumber);
 
         em.persist(customer);
+        em.flush();
         return customer;
     }
 

@@ -9,9 +9,12 @@ import entity.Customer;
 import entity.CustomerOrder;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.ejb.EJB;
+import javax.inject.Inject;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.HttpConstraint;
 import javax.servlet.annotation.ServletSecurity;
@@ -36,6 +39,7 @@ import session.OrderManager;
 @ServletSecurity( @HttpConstraint(rolesAllowed = {"PetStoreAdmin"}) )
 public class AdminServlet extends HttpServlet {
 
+    //@Inject
     @EJB
     private OrderManager orderManager;
     @EJB

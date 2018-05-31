@@ -76,9 +76,11 @@ public class Customer implements Serializable {
     @Size(max = 19)
     @Column(name = "CC_NUMBER")
     private String ccNumber;
+
+    /*
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customerId")
     private Collection<CustomerOrder> customerOrderCollection;
-
+    */
     public Customer() {
     }
 
@@ -151,6 +153,7 @@ public class Customer implements Serializable {
         this.ccNumber = ccNumber;
     }
 
+    /*
     @XmlTransient
     public Collection<CustomerOrder> getCustomerOrderCollection() {
         return customerOrderCollection;
@@ -159,6 +162,7 @@ public class Customer implements Serializable {
     public void setCustomerOrderCollection(Collection<CustomerOrder> customerOrderCollection) {
         this.customerOrderCollection = customerOrderCollection;
     }
+    */
 
     @Override
     public int hashCode() {

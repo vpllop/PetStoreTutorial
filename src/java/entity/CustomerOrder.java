@@ -63,16 +63,17 @@ public class CustomerOrder implements Serializable {
     @Column(name = "CONFIRMATION_NUMBER")
     private int confirmationNumber;
     
-//    @JoinColumn(name = "CUSTOMER_ID", referencedColumnName = "ID")
-//    @ManyToOne(optional = false)
-    private Customer customerId;
+    @JoinColumn(name = "CUSTOMER_ID", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private Customer customer;
+/**
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customerOrder")
     private Collection<OrderedProduct> orderedProductCollection;
-    
+   */
      
-    @ManyToOne(optional = false)
-    private Customer customer;
+    //@ManyToOne(optional = false)
+    //private Customer customer;
     
     public CustomerOrder() {
     }
@@ -128,13 +129,15 @@ public class CustomerOrder implements Serializable {
 //        this.customerId = customerId;
 //    }
 
+    /*
     @XmlTransient
     public Collection<OrderedProduct> getOrderedProductCollection() {
         return orderedProductCollection;
     }
+    */
 
     public void setOrderedProductCollection(Collection<OrderedProduct> orderedProductCollection) {
-        this.orderedProductCollection = orderedProductCollection;
+        //this.orderedProductCollection = orderedProductCollection;
     }
     
     public Customer getCustomer() {
